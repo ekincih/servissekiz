@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Teknik Servis Formu</title>
+    <link rel="stylesheet" href="style.css" />
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+    function addRow() {
+  var table = document.getElementById("parcaListesi");
+  var row = table.insertRow(-1);
+  var parca = row.insertCell(0);
+  var adet = row.insertCell(1);
+  var ucret = row.insertCell(2);
+  var removeBtn = row.insertCell(3);
+
+  parca.innerHTML = '<select name="parcalar[]">' + $("#parcalar").html() + '</select>';
+  adet.innerHTML = '<input type="number" name="adet[]" min="1" required />';
+  ucret.innerHTML = '<input type="number" name="ucret[]" required />';
+  removeBtn.innerHTML = '<button type="button" onclick="removeRow(this)">Kaldır</button>';
+}
+
+
+      function removeRow(btn) {
+        var row = btn.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo">
+          <h1>Teknik Servis Formu</h1>
+        </div>
+      </div>
+      <hr />
+      <form>
+        <div class="section">
+          <h2>Müşteri Bilgileri</h2>
+          <div class="form-grup">
+            <label for="firmaAdi">Firma Adı:</label>
+            <input type="text" id="firmaAdi" name="firmaAdi" required />
+          </div>
+          <div class="form-grup">
+            <label for="adres">Adres:</label>
+            <textarea id="adres" name="adres" required></textarea>
+          </div>
+          <div class="form-grup">
+            <label for="telefon">Tel:</label>
+            <input type="tel" id="telefon" name="telefon" required />
+          </div>
+          <div class="form-grup">
+            <label for="email">E-Posta:</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+        </div>
+        <div class="section">
+          <h2>Arıza ve Yapılan İşlemler</h2>
+          <div class="form-grup">
+            <label for="ariza">Arıza:</label>
+            <textarea id="ariza" name="ariza" required></textarea>
+          </div>
+          <div class="form-grup">
+            <label for="yapilanIslem">Yapılan İşlem:</label>
+            <textarea id="yapilanIslem" name="yapilanIslem" required></textarea>
+          </div>
+<div class="form-grup">
+  <label>Kullanılan Parçalar:</label>
+  <table id="parcaListesi">
+    <tr>
+      <th>Parça Adı</th>
+      <th>Adet</th>
+      <th>Ücret $</th>
+      <th></th>
+    </tr>
+    <tr>
+      <td>
+        <select id="parcalar" name="parcalar[]">
+          <option value="">-- Parça Seçin --</option>
+          <option value="TX800 KAFA">TX800 KAFA</option>
+          <option value="XP600 KAFA">XP600 KAFA</option>
+          <option value="CAP">CAP</option>
+          <option value="DUMPER">DUMPER</option>
+          <option value="SİLGİ">SİLGİ</option>
+          <option value="K.KABLOSU">K.KABLOSU</option>
+          <option value="FİBEROPTİK">FİBEROPTİK</option>
+          <option value="HORTUMHATTI">HORTUMHATTI</option>
+          <option value="SİSTEM KABLOSU">SİSTEM KABLOSU</option>
+          <option value="POWERSUPLY">POWERSUPLY</option>
+          <option value="KAFA KARTI">KAFA KARTI</option>
+          <option value="ANAKART">ANAKART</option>
+          <option value="MENÜ EKRANI">MENÜ EKRANI</option>
+          <option value="ASANSÖRLAZERİ">ASANSÖRLAZERİ</option>
+        </select>
+      </td>
+      <td>
+        <input type="number" name="adet[]" min="1" required />
+      </td>
+      <td>
+        <span class="currency"></span>
+        <input type="number" name="ucret[]" required />
+      </td>
+      <td>
+        <button type="button" onclick="removeRow(this)">Kaldır</button>
+      </td>
+    </tr>
+  </table>
+  <button type="button" onclick="addRow()">Parça Ekle</button>
+</div>
+
+
+          <div class="section">
+          <h2>İmza ve Onay</h2>
+          <div class="form-grup">
+            <label for="musteriAdiSoyadi">Müşteri Adı Soyadı:</label>
+            <input type="text" id="musteriAdiSoyadi" name="musteriAdiSoyadi" required />
+          </div>
+          <div class="form-grup-row">
+            <div class="form-grup-col">
+              <label for="servisAdi">Servis Adı Soyadı:</label>
+              <input type="text" id="servisAdi" name="servisAdi" required />
+            </div>
+            <div class="form-grup-col">
+              <label for="servisImza">Servis İmza:</label>
+              <canvas id="servisImza" width="300" height="200"></canvas>
+            </div>
+          </div>
+          <div class="form-grup-row">
+            <div class="form-grup-col">
+              <label for="onayAdiSoyadi">Onaylayan Adı Soyadı:</label>
+              <input type="text" id="onayAdiSoyadi" name="onayAdiSoyadi" required />
+            </div>
+            <div class="form-grup-col">
+              <label for="onayImza">Onay İmza:</label>
+              <canvas id="onayImza" width="300" height="200"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="left">
+            <p>&copy; 2023 Teknik Servis Formu</p>
+          </div>
+          <div class="right">
+            <p>Tel: 555-1234</p>
+            <p>E-Posta: info@teknikservis.com</p>
+          </div>
+        </div>
+        <div class="form-grup">
+          <input type="submit" value="Gönder" />
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
+
